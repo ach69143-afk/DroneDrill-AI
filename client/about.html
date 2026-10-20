@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Methodology & Architecture</title>
+  <link rel="stylesheet" href="style.css?v=sakshi">
+</head>
+<body>
+
+  <!-- Offline/Error Banner -->
+  <div id="api-banner" class="api-banner">
+    <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+    <button class="btn-api-retry" id="btn-api-retry" onclick="location.reload()">Retry</button>
+  </div>
+
+  <!-- Top Navigation Bar (SAKSHI App Shell) -->
+  <header class="top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <h1 class="brand-title">DRONEDRILL AI</h1>
+          <span class="brand-badge">METHODOLOGY</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="condition-chips">
+      <div class="chip chip-ok" id="chip-system-ready"><span class="chip-dot"></span><span>SYSTEM READY</span></div>
+    </div>
+
+    <div class="header-controls">
+      <span class="chip"><span class="chip-dot"></span><span>SIH 2026 · PS 26247</span></span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout" style="grid-template-columns: 240px 1fr;">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Train</span>
+          <a href="simulator.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Reference</span>
+          <a href="guide.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- System Architecture Info -->
+      <div class="current-session-box" style="margin-top: auto;">
+        <span class="session-box-title">System Architecture</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Stack</span>
+          <span class="metric-value">FastAPI + SQLite</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Client</span>
+          <span class="metric-value">Vanilla HTML/CSS/JS</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="page-container">
+
+      <!-- Header Section -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>DRONEDRILL AI - SYSTEM ARCHITECTURE & METHODOLOGY</span>
+          <span class="chip chip-ok"><span class="chip-dot"></span><span>OFFLINE PROTOTYPE</span></span>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 6px;">
+          DroneDrill AI is an offline, adaptive counter-UAS training architecture. It ingests procedural or simulated MAVLink-style telemetry, executes Signal Detection Theory and Bayesian skill tracking, and isolates memorization from genuine threat recognition via held-out generalization testing.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram (Inline SVG) -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>1. END-TO-END PIPELINE ARCHITECTURE</span>
+          <span class="chip"><span class="chip-dot"></span><span>DATA FLOW</span></span>
+        </div>
+
+        <div class="arch-diagram-card">
+          <svg width="860" height="240" viewBox="0 0 860 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+            <!-- Background grid accent -->
+            <defs>
+              <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#15151a"/>
+                <stop offset="100%" stop-color="#0e0e11"/>
+              </linearGradient>
+              <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e11d2e"/>
+                <stop offset="100%" stop-color="#b91c1c"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Node 1: Telemetry Generator -->
+            <rect x="10" y="70" width="130" height="90" rx="10" fill="url(#boxGrad)" stroke="rgba(148,163,184,0.18)" stroke-width="1.5"/>
+            <text x="75" y="105" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, 'Segoe UI', sans-serif" font-weight="600" font-size="12" letter-spacing="0.5">SIMULATED TELEMETRY</text>
+            <text x="75" y="125" text-anchor="middle" fill="#8b95a7" font-family="'JetBrains Mono', monospace" font-size="10">Kinematic Packets</text>
+            <text x="75" y="140" text-anchor="middle" fill="#2f6bff" font-family="'JetBrains Mono', monospace" font-size="9">MAVLink-Style</text>
+
+            <!-- Arrow 1 -> 2 -->
+            <path d="M140 115 L175 115" stroke="#2f6bff" stroke-width="2" stroke-dasharray="4 2"/>
+            <polygon points="175,111 183,115 175,119" fill="#2f6bff"/>
+
+            <!-- Node 2: Stream Adapter -->
+            <rect x="185" y="70" width="125" height="90" rx="10" fill="url(#boxGrad)" stroke="rgba(148,163,184,0.18)" stroke-width="1.5"/>
+            <text x="247" y="105" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, 'Segoe UI', sans-serif" font-weight="600" font-size="12" letter-spacing="0.5">TELEMETRY ADAPTER</text>
+            <text x="247" y="125" text-anchor="middle" fill="#8b95a7" font-family="'JetBrains Mono', monospace" font-size="10">FOV Sensor Gates</text>
+            <text x="247" y="140" text-anchor="middle" fill="#8b95a7" font-family="'JetBrains Mono', monospace" font-size="9">Visibility Windows</text>
+
+            <!-- Arrow 2 -> 3 -->
+            <path d="M310 115 L345 115" stroke="#2f6bff" stroke-width="2" stroke-dasharray="4 2"/>
+            <polygon points="345,111 353,115 345,119" fill="#2f6bff"/>
+
+            <!-- Node 3: Core Backend (FastAPI + Engines) -->
+            <rect x="355" y="25" width="220" height="180" rx="12" fill="url(#boxGrad)" stroke="rgba(47,107,255,0.4)" stroke-width="1.5"/>
+            <rect x="355" y="25" width="220" height="28" rx="12" fill="rgba(47,107,255,0.15)"/>
+            <text x="465" y="44" text-anchor="middle" fill="#4f86ff" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="11" letter-spacing="1">FASTAPI CORE ENGINES</text>
+
+            <rect x="370" y="65" width="190" height="26" rx="6" fill="#0b0e14" stroke="rgba(148,163,184,0.14)"/>
+            <text x="465" y="82" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, sans-serif" font-size="11">Scenario Generator (540 Cells)</text>
+
+            <rect x="370" y="98" width="190" height="26" rx="6" fill="#0b0e14" stroke="rgba(148,163,184,0.14)"/>
+            <text x="465" y="115" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, sans-serif" font-size="11">SDT Scoring (d', c, Brier, SOP)</text>
+
+            <rect x="370" y="131" width="190" height="26" rx="6" fill="#0b0e14" stroke="rgba(148,163,184,0.14)"/>
+            <text x="465" y="148" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, sans-serif" font-size="11">Bayesian Skill Model (Conjugate)</text>
+
+            <rect x="370" y="164" width="190" height="26" rx="6" fill="#0b0e14" stroke="rgba(148,163,184,0.14)"/>
+            <text x="465" y="181" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, sans-serif" font-size="11">Adaptive Selector (Thompson)</text>
+
+            <!-- Arrow 3 -> 4 (SQLite) -->
+            <path d="M575 90 L615 90" stroke="#2f6bff" stroke-width="2"/>
+            <polygon points="615,86 623,90 615,94" fill="#2f6bff"/>
+
+            <!-- Node 4: SQLite Database -->
+            <rect x="625" y="55" width="95" height="70" rx="8" fill="url(#boxGrad)" stroke="rgba(148,163,184,0.18)" stroke-width="1.5"/>
+            <text x="672" y="85" text-anchor="middle" fill="#e6eaf2" font-family="'Inter', ui-sans-serif, 'Segoe UI', sans-serif" font-weight="600" font-size="11">SQLITE STORE</text>
+            <text x="672" y="103" text-anchor="middle" fill="#8b95a7" font-family="'JetBrains Mono', monospace" font-size="9">Local Offline</text>
+
+            <!-- Arrow 4 -> 5 -->
+            <path d="M720 90 L750 90" stroke="#2f6bff" stroke-width="2"/>
+            <polygon points="750,86 758,90 750,94" fill="#2f6bff"/>
+
+            <!-- Node 5: DroneDrill Client Dashboards -->
+            <rect x="760" y="45" width="90" height="140" rx="10" fill="url(#boxGrad)" stroke="rgba(47,107,255,0.4)" stroke-width="1.5"/>
+            <text x="805" y="70" text-anchor="middle" fill="#4f86ff" font-family="'Inter', ui-sans-serif, 'Segoe UI', sans-serif" font-weight="600" font-size="11">DRONEDRILL UI</text>
+            <text x="805" y="92" text-anchor="middle" fill="#8b95a7" font-family="'Inter', ui-sans-serif, sans-serif" font-size="10">Simulator HUD</text>
+            <text x="805" y="112" text-anchor="middle" fill="#8b95a7" font-family="'Inter', ui-sans-serif, sans-serif" font-size="10">AAR Review</text>
+            <text x="805" y="132" text-anchor="middle" fill="#8b95a7" font-family="'Inter', ui-sans-serif, sans-serif" font-size="10">Skill Matrix</text>
+            <text x="805" y="152" text-anchor="middle" fill="#8b95a7" font-family="'Inter', ui-sans-serif, sans-serif" font-size="10">Generalization</text>
+            <text x="805" y="172" text-anchor="middle" fill="#8b95a7" font-family="'Inter', ui-sans-serif, sans-serif" font-size="10">Unit Bench</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Scoring Weights Table -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>2. MULTI-DIMENSIONAL SCORING WEIGHTS</span>
+          <span class="chip"><span class="chip-dot"></span><span>SUM = 100%</span></span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="tactical-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th style="text-align: right;">Weight</th>
+                <th>Underlying Theoretical Method</th>
+                <th>Evaluation Objective</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Detection</strong></td>
+                <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--red-text);">30%</td>
+                <td>Signal Detection Theory: $d'$ (sensitivity) and $c$ (criterion bias) with loglinear extreme correction.</td>
+                <td>Measures perceptual ability to isolate true targets from sensor noise and clutter without excessive false alarms.</td>
+              </tr>
+              <tr>
+                <td><strong>Classification</strong></td>
+                <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--red-text);">25%</td>
+                <td>Multiclass accuracy over confusion matrix penalty ($C_{\text{true}} = C_{\text{pred}}$).</td>
+                <td>Evaluates recognition across birds, balloons, multirotors, fixed-wing UAVs, and aircraft.</td>
+              </tr>
+              <tr>
+                <td><strong>Decision (SOP)</strong></td>
+                <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--red-text);">25%</td>
+                <td>Tactical rules compliance matrix from decision tree rules table.</td>
+                <td>Scores tactical appropriateness of response (e.g. Ignore, Monitor, Command Report, Unit Alert, Countermeasure).</td>
+              </tr>
+              <tr>
+                <td><strong>Timeliness</strong></td>
+                <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--red-text);">10%</td>
+                <td>Reaction latency normalized by scenario duration and target trajectory closure speed.</td>
+                <td>Rewards rapid detection before targets breach perimeter threat radii.</td>
+              </tr>
+              <tr>
+                <td><strong>Calibration</strong></td>
+                <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--red-text);">10%</td>
+                <td>Brier score calibration: $1 - (\text{confidence} - \text{accuracy})^2$.</td>
+                <td>Discourages unwarranted overconfidence or underconfident hesitation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 10px;">
+          Overall Session Score Formula: $S = 0.30 \cdot S_{\text{det}} + 0.25 \cdot S_{\text{cls}} + 0.25 \cdot S_{\text{dec}} + 0.10 \cdot S_{\text{time}} + 0.10 \cdot S_{\text{cal}}$
+        </div>
+      </div>
+
+      <!-- Generalization Explained in Plain Words -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>3. HELD-OUT GENERALIZATION & ROTE GAP EXPLAINED</span>
+          <span class="chip"><span class="chip-dot"></span><span>80 / 20 FACTORIAL SPLIT</span></span>
+        </div>
+        <div style="font-size: 13.5px; line-height: 1.6; color: var(--text);">
+          <p>
+            Standard military and industrial simulators frequently fall victim to <strong>memorization bias</strong>: operators practice identical terrain, weather, and sensor presets repeatedly until high scores reflect familiarity with the drill rather than genuine threat recognition.
+          </p>
+          <p style="margin-top: 8px;">
+            To resolve this, DroneDrill AI divides the 540-cell condition factor space into:
+          </p>
+          <ul style="padding-left: 20px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+            <li><strong>Practice Split (80% / 432 cells):</strong> Available for procedural adaptive training and scripted library drills.</li>
+            <li><strong>Held-Out Test Split (20% / 108 cells):</strong> Strictly quarantined from all practice, recommendation, and instructor builder drills.</li>
+          </ul>
+          <p style="margin-top: 8px;">
+            In Test Mode, an operator is presented exclusively with held-out condition combinations. The system then computes the <strong>Rote Gap</strong>:
+          </p>
+          <div style="background: var(--panel-2); border-left: 3px solid var(--red); padding: 10px 14px; font-family: var(--font-mono); font-size: 12px; margin: 8px 0;">
+            Rote Gap = Practice Mean Score - Held-Out Test Mean Score
+          </div>
+          <p>
+            A near-zero Rote Gap proves that the operator has learned robust visual and kinematic principles that transfer reliably to novel, unseen threat situations. A high gap reveals overfitting to training templates.
+          </p>
+        </div>
+      </div>
+
+      <!-- Validation Evidence Panel -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>4. EMPIRICAL VALIDATION EVIDENCE</span>
+          <span class="chip chip-ok" id="val-status-chip"><span class="chip-dot"></span><span id="val-status-text">VALIDATED</span></span>
+        </div>
+
+        <div style="font-size: 13px; line-height: 1.5; color: var(--muted);">
+          To verify that the hierarchical Bayesian skill engine accurately recovers underlying operational capabilities without bias, a ground-truth parameter recovery test was performed using a synthetic agent (<code style="color: var(--text);">SimLearner</code>) across 40 distinct practice sessions.
+        </div>
+
+        <div class="grid-3-col" style="grid-template-columns: repeat(3, 1fr); margin-top: 14px; gap: 14px;">
+          <div class="stat-card">
+            <span class="stat-label">Correlation Coefficient (r)</span>
+            <span class="stat-card-val" id="val-r-val" style="color: var(--green);">0.8872</span>
+            <span class="stat-note">Threshold: r > 0.70</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Evaluated Sessions</span>
+            <span class="stat-card-val" id="val-sessions-val">40</span>
+            <span class="stat-note">SimLearner agent across conditions</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Statistical Significance</span>
+            <span class="stat-card-val" id="val-p-val" style="font-size: 20px;">p < 10⁻⁵</span>
+            <span class="stat-note">High confidence skill convergence</span>
+          </div>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 10px;" id="val-note-text">
+          Source: data/validation_report.json (via GET /validation)
+        </div>
+      </div>
+
+      <!-- Limitations Box -->
+      <div class="limitations-box">
+        <div class="limitations-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>PROTOTYPE LIMITATIONS & OPERATIONAL BOUNDARIES</span>
+        </div>
+
+        <ul class="limitations-list">
+          <li><strong>Abstract Scenarios:</strong> Visual models and kinematics are synthetic geometric approximations designed for cognitive recognition training; not a certified military simulation.</li>
+          <li><strong>Decision Tree SOP:</strong> Response appropriateness weights and threat categories are instructor-editable drafts pending formal military doctrine and expert review.</li>
+          <li><strong>Difficulty Weights:</strong> Condition factor difficulty indices are analytical estimates that require empirical calibration through human subject trials.</li>
+          <li><strong>Pilot Study:</strong> No human operator pilot study has been conducted yet; performance curves represent preliminary synthetic agent benchmarks.</li>
+          <li><strong>Synthetic Trainees:</strong> Roster data and cohort historical profiles reflect synthetic demonstration agents.</li>
+        </ul>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(234, 179, 8, 0.2); padding-top: 8px; margin-top: 4px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--amber);">SIH 2026 Innovation Submission</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text);">TEAM NEXXGENX · PS 26247</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js?v=sakshi"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch(`${CONFIG.API_BASE}/validation`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (data.r !== undefined && data.r !== null) {
+          const rEl = document.getElementById('val-r-val');
+          const sessEl = document.getElementById('val-sessions-val');
+          const pEl = document.getElementById('val-p-val');
+          const noteEl = document.getElementById('val-note-text');
+          const statusText = document.getElementById('val-status-text');
+
+          if (rEl) rEl.textContent = Number(data.r).toFixed(4);
+          if (sessEl) sessEl.textContent = data.sessions || 40;
+          if (pEl && data.p_value) pEl.textContent = Number(data.p_value) < 0.001 ? 'p < 0.001' : `p = ${Number(data.p_value).toFixed(4)}`;
+          if (noteEl && data.note) noteEl.textContent = data.note;
+          if (statusText && data.status) statusText.textContent = data.status;
+        }
+      } catch (err) {
+        console.warn('Failed to load validation report:', err);
+      }
+    });
+  </script>
+</body>
+</html>

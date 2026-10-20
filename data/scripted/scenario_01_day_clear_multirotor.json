@@ -1,0 +1,42 @@
+{
+  "scenario_id": "scripted_01_day_clear_multirotor",
+  "title": "Clear Day Solo Multirotor",
+  "description": "Baseline daylight detection drill in clear open airspace with a single approaching multirotor.",
+  "source": "scripted",
+  "cell": [
+    "day",
+    "clear",
+    "open",
+    "EO",
+    "none",
+    "none"
+  ],
+  "factors": {
+    "time_of_day": "day",
+    "weather": "clear",
+    "terrain": "open",
+    "sensor_mode": "EO",
+    "degradation": "none",
+    "distractors": "none",
+    "object_count": "1",
+    "motion_pattern": "straight",
+    "speed_band": "med",
+    "altitude_band": "med",
+    "bearing_sector": "N"
+  },
+  "objects": [
+    {
+      "id": "target_alpha_01",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [0.0, 1500.0, 120.0],
+      "velocity": [0.0, -20.0, 0.0],
+      "appears_at_time": 0.0
+    }
+  ],
+  "duration_s": 60.0,
+  "noise_windows": 3,
+  "difficulty_index": 0.28,
+  "fingerprint": "scripted_fp_day_clear_multirotor_01"
+}

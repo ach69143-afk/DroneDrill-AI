@@ -1,0 +1,51 @@
+{
+  "scenario_id": "scripted_02_dusk_fog_dual",
+  "title": "Dusk Fog Dual Contact",
+  "description": "Low-visibility dusk scenario featuring EO sensor lag and atmospheric fog with two simultaneous contacts (one benign light aircraft, one suspicious fixed-wing UAV).",
+  "source": "scripted",
+  "cell": [
+    "dusk",
+    "fog",
+    "urban",
+    "EO",
+    "lag",
+    "none"
+  ],
+  "factors": {
+    "time_of_day": "dusk",
+    "weather": "fog",
+    "terrain": "urban",
+    "sensor_mode": "EO",
+    "degradation": "lag",
+    "distractors": "none",
+    "object_count": "2-3",
+    "motion_pattern": "parallel",
+    "speed_band": "med",
+    "altitude_band": "med",
+    "bearing_sector": "NE"
+  },
+  "objects": [
+    {
+      "id": "contact_benign_01",
+      "true_class": "light_aircraft",
+      "true_threat_level": 1,
+      "behaviour_label": "benign",
+      "start_position": [450.0, 1800.0, 220.0],
+      "velocity": [-10.0, -20.0, 0.0],
+      "appears_at_time": 0.0
+    },
+    {
+      "id": "contact_hostile_02",
+      "true_class": "fixed_wing_uav",
+      "true_threat_level": 3,
+      "behaviour_label": "suspicious",
+      "start_position": [800.0, 1400.0, 180.0],
+      "velocity": [-20.0, -18.0, 0.0],
+      "appears_at_time": 2.5
+    }
+  ],
+  "duration_s": 60.0,
+  "noise_windows": 3,
+  "difficulty_index": 0.58,
+  "fingerprint": "scripted_fp_dusk_fog_dual_02"
+}

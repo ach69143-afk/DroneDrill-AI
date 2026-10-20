@@ -1,0 +1,69 @@
+{
+  "scenario_id": "scripted_03_night_thermal_flock",
+  "title": "Night Thermal Bird Flock",
+  "description": "Nighttime thermal imaging drill in urban airspace confronting a flock of birds alongside benign biological distractors.",
+  "source": "scripted",
+  "cell": [
+    "night",
+    "clear",
+    "urban",
+    "thermal",
+    "none",
+    "birds"
+  ],
+  "factors": {
+    "time_of_day": "night",
+    "weather": "clear",
+    "terrain": "urban",
+    "sensor_mode": "thermal",
+    "degradation": "none",
+    "distractors": "birds",
+    "object_count": "4-8",
+    "motion_pattern": "loiter",
+    "speed_band": "low",
+    "altitude_band": "low",
+    "bearing_sector": "E"
+  },
+  "objects": [
+    {
+      "id": "avian_lead_01",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [-60.0, 1400.0, 140.0],
+      "velocity": [2.0, -10.0, 0.0],
+      "appears_at_time": 0.0
+    },
+    {
+      "id": "avian_wing_02",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [20.0, 1450.0, 150.0],
+      "velocity": [1.8, -9.8, 0.1],
+      "appears_at_time": 0.5
+    },
+    {
+      "id": "avian_trail_03",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [-120.0, 1480.0, 135.0],
+      "velocity": [2.2, -10.2, -0.1],
+      "appears_at_time": 1.0
+    },
+    {
+      "id": "avian_scout_04",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [80.0, 1500.0, 160.0],
+      "velocity": [1.5, -9.5, 0.0],
+      "appears_at_time": 1.5
+    }
+  ],
+  "duration_s": 60.0,
+  "noise_windows": 5,
+  "difficulty_index": 0.52,
+  "fingerprint": "scripted_fp_night_thermal_flock_03"
+}

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Decision Tree SOP Rules</title>
+  <link rel="stylesheet" href="style.css?v=sakshi">
+</head>
+<body>
+
+  <!-- Offline/Error Banner -->
+  <div id="api-banner" class="api-banner">
+    <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+    <button class="btn-api-retry" id="btn-api-retry" onclick="location.reload()">Retry</button>
+  </div>
+
+  <!-- Top Navigation Bar (SAKSHI App Shell) -->
+  <header class="top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <h1 class="brand-title">DRONEDRILL AI</h1>
+          <span class="brand-badge">DECISION TREE</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="condition-chips">
+      <div class="chip chip-ok" id="chip-system-ready"><span class="chip-dot"></span><span>SYSTEM READY</span></div>
+    </div>
+
+    <div class="header-controls">
+      <span class="chip highlight"><span class="chip-dot"></span><span id="rules-count-chip">Rules: Loading...</span></span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout" style="grid-template-columns: 240px 1fr;">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Train</span>
+          <a href="simulator.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Reference</span>
+          <a href="guide.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Quick Info Box -->
+      <div class="current-session-box" style="margin-top: auto;">
+        <span class="session-box-title">Validation Status</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Review State</span>
+          <span class="metric-value" style="color: var(--amber);">Pending Expert Review</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Access Mode</span>
+          <span class="metric-value">Read-Only</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="page-container">
+
+      <!-- Mandatory Expert Review Banner -->
+      <div class="status-callout warning" style="margin-bottom: 16px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <strong style="font-family: var(--font-heading); font-size: 16px; color: var(--amber);">
+            INSTRUCTOR-EDITABLE DRAFT · PENDING EXPERT REVIEW · NOT VALIDATED
+          </strong>
+          <p style="font-size: 13px; color: var(--text); margin-top: 4px; line-height: 1.45;">
+            These procedural decision tree rules govern the scoring of response appropriateness. They represent initial heuristic rules for prototype evaluation and require operational doctrine sign-off before tactical deployment.
+          </p>
+        </div>
+      </div>
+
+      <!-- Rules Filter Toolbar -->
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <span class="filter-label">Target Class:</span>
+          <select id="filter-class" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Classes</option>
+            <option value="bird">Bird</option>
+            <option value="balloon">Balloon</option>
+            <option value="multirotor">Multirotor Drone</option>
+            <option value="fixed_wing_uav">Fixed-Wing UAV</option>
+            <option value="light_aircraft">Light Aircraft</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Behavior:</span>
+          <select id="filter-behavior" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Behaviors</option>
+            <option value="benign">Benign</option>
+            <option value="suspicious">Suspicious</option>
+            <option value="hostile">Hostile</option>
+          </select>
+        </div>
+
+        <div class="filter-group" style="margin-left: auto;">
+          <input type="text" id="filter-search" class="select-custom" placeholder="Search rules..." style="padding: 4px 10px; font-size: 11px; width: 160px;">
+        </div>
+      </div>
+
+      <!-- Decision Rules Table Panel -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>OPERATIONAL DECISION RULES & RESPONSE SCORE WEIGHTS</span>
+          <span class="chip"><span class="chip-dot"></span><span>GET /decision-tree</span></span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="tactical-table" id="tree-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Behavior</th>
+                <th style="text-align: center;">Expected Threat</th>
+                <th>Optimal Response (1.0)</th>
+                <th>Acceptable Response (0.5)</th>
+                <th>Unacceptable (0.0)</th>
+              </tr>
+            </thead>
+            <tbody id="tree-tbody">
+              <!-- Populated from JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Loading State -->
+        <div id="tree-loading" class="state-box">
+          <span class="spinner"></span>
+          <div class="state-title" style="font-size: 18px;">RETRIEVING DECISION TREE RULES...</div>
+          <div class="state-desc" style="font-family: var(--font-mono); font-size: 11px;">Connecting to GET /decision-tree</div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="tree-empty" class="state-box" style="display: none;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/></svg>
+          <div class="state-title">NO MATCHING RULES</div>
+          <div class="state-desc">No decision rules match the selected class or behavior filter.</div>
+        </div>
+      </div>
+
+      <!-- Threat Level Reference Card -->
+      <div class="grid-3-col" style="grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 14px;">
+        <div class="stat-card" style="border-color: rgba(34, 197, 94, 0.4);">
+          <span class="stat-label">Level 0 · Benign</span>
+          <span class="stat-card-val" style="color: var(--green); font-size: 20px;">BENIGN</span>
+          <span class="stat-note">Natural wildlife or authorized craft</span>
+        </div>
+        <div class="stat-card" style="border-color: rgba(142, 142, 153, 0.3);">
+          <span class="stat-label">Level 1 · Low</span>
+          <span class="stat-card-val" style="color: var(--muted); font-size: 20px;">LOW</span>
+          <span class="stat-note">Anomalous heading or unverified drift</span>
+        </div>
+        <div class="stat-card" style="border-color: rgba(234, 179, 8, 0.4);">
+          <span class="stat-label">Level 2 · Elevated</span>
+          <span class="stat-card-val" style="color: var(--amber); font-size: 20px;">ELEVATED</span>
+          <span class="stat-note">Direct perimeter approach trajectory</span>
+        </div>
+        <div class="stat-card" style="border-color: rgba(239, 68, 68, 0.4);">
+          <span class="stat-label">Level 3 · High</span>
+          <span class="stat-card-val" style="color: var(--red-text); font-size: 20px;">HIGH</span>
+          <span class="stat-note">Aggressive vector, payload, or swarm</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js?v=sakshi"></script>
+  <script>
+    let ruleEntries = [];
+
+    async function loadDecisionTree() {
+      const loadingEl = document.getElementById('tree-loading');
+      const emptyEl = document.getElementById('tree-empty');
+      const tbody = document.getElementById('tree-tbody');
+      const countChip = document.getElementById('rules-count-chip');
+      const banner = document.getElementById('api-banner');
+
+      try {
+        loadingEl.style.display = 'flex';
+        emptyEl.style.display = 'none';
+
+        const res = await fetch(`${CONFIG.API_BASE}/decision-tree`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (banner) banner.style.display = 'none';
+
+        const rulesObj = data.rules || {};
+        ruleEntries = Object.keys(rulesObj).map(key => {
+          const parts = key.split('|');
+          return {
+            key: key,
+            className: parts[0] || 'unknown',
+            behavior: parts[1] || 'unknown',
+            expectedThreat: rulesObj[key].expected_threat_level,
+            responses: rulesObj[key].responses || {}
+          };
+        });
+
+        if (countChip) countChip.textContent = `Rules: ${ruleEntries.length} SOP Cases`;
+        renderRules();
+
+      } catch (err) {
+        console.error('Failed to load decision tree:', err);
+        if (banner) banner.style.display = 'flex';
+        loadingEl.style.display = 'none';
+        emptyEl.style.display = 'flex';
+        emptyEl.querySelector('.state-title').textContent = 'API ERROR';
+        emptyEl.querySelector('.state-desc').textContent = 'Could not load decision tree rules from server.';
+      } finally {
+        loadingEl.style.display = 'none';
+      }
+    }
+
+    function renderRules() {
+      const classFilter = document.getElementById('filter-class').value.toLowerCase();
+      const behFilter = document.getElementById('filter-behavior').value.toLowerCase();
+      const search = document.getElementById('filter-search').value.toLowerCase().trim();
+      const tbody = document.getElementById('tree-tbody');
+      const emptyEl = document.getElementById('tree-empty');
+
+      const filtered = ruleEntries.filter(r => {
+        if (classFilter && r.className.toLowerCase() !== classFilter) return false;
+        if (behFilter && r.behavior.toLowerCase() !== behFilter) return false;
+        if (search) {
+          const text = `${r.className} ${r.behavior} ${r.key}`.toLowerCase();
+          if (!text.includes(search)) return false;
+        }
+        return true;
+      });
+
+      tbody.innerHTML = '';
+
+      if (filtered.length === 0) {
+        emptyEl.style.display = 'flex';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      filtered.forEach(r => {
+        const tr = document.createElement('tr');
+
+        // Threat badge
+        let threatColor = 'var(--muted)';
+        let threatName = 'UNKNOWN';
+        if (r.expectedThreat === 0) { threatColor = 'var(--green)'; threatName = '0 - BENIGN'; }
+        else if (r.expectedThreat === 1) { threatColor = 'var(--text)'; threatName = '1 - LOW'; }
+        else if (r.expectedThreat === 2) { threatColor = 'var(--amber)'; threatName = '2 - ELEVATED'; }
+        else if (r.expectedThreat === 3) { threatColor = 'var(--red-text)'; threatName = '3 - HIGH'; }
+
+        // Group responses by score
+        const optimal = [];
+        const acceptable = [];
+        const unacceptable = [];
+
+        Object.keys(r.responses).forEach(resp => {
+          const score = r.responses[resp];
+          const label = formatResponseLabel(resp);
+          if (score >= 1.0) optimal.push(label);
+          else if (score > 0.0) acceptable.push(label);
+          else unacceptable.push(label);
+        });
+
+        tr.innerHTML = `
+          <td><strong style="color: var(--text);">${formatClassLabel(r.className)}</strong></td>
+          <td><span class="chip" style="font-size: 10px; padding: 2px 6px;">${r.behavior.toUpperCase()}</span></td>
+          <td style="text-align: center;">
+            <span style="font-family: var(--font-mono); font-weight: 700; color: ${threatColor}; font-size: 11px;">
+              ${threatName}
+            </span>
+          </td>
+          <td>
+            ${optimal.map(o => `<span class="chip chip-ok" style="font-size: 9.5px; padding: 2px 5px; margin-right: 4px; display: inline-flex;">${o}</span>`).join('') || '--'}
+          </td>
+          <td>
+            ${acceptable.map(a => `<span class="chip highlight" style="font-size: 9.5px; padding: 2px 5px; margin-right: 4px; display: inline-flex;">${a}</span>`).join('') || '<span style="color: var(--muted); font-size: 11px;">None</span>'}
+          </td>
+          <td>
+            <span style="font-size: 11px; color: var(--muted); line-height: 1.3;">
+              ${unacceptable.join(', ') || 'None'}
+            </span>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function formatClassLabel(cls) {
+      if (cls === 'fixed_wing_uav') return 'Fixed-Wing UAV';
+      if (cls === 'light_aircraft') return 'Light Aircraft';
+      if (cls === 'multirotor') return 'Multirotor Drone';
+      return cls.charAt(0).toUpperCase() + cls.slice(1);
+    }
+
+    function formatResponseLabel(r) {
+      return r.replace(/_/g, ' ').toUpperCase();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDecisionTree();
+      document.getElementById('filter-class').addEventListener('change', renderRules);
+      document.getElementById('filter-behavior').addEventListener('change', renderRules);
+      document.getElementById('filter-search').addEventListener('input', renderRules);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Visuals & Terrain Contact Sheet</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #06090e;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .test-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 18, 26, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .test-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .test-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .test-controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .ctrl-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .ctrl-item select {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .ctrl-item select:focus {
+      border-color: var(--blue);
+    }
+
+    .btn-nav-back {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-nav-back:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .test-grid-container {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .card-canvas {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-canvas-header {
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-canvas-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .card-canvas-meta {
+      font-size: 11px;
+      color: var(--blue);
+      font-family: var(--font-mono);
+    }
+
+    .card-canvas-body {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #04070c;
+    }
+
+    .card-canvas-body canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-canvas-footer {
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      background: #090e16;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="test-header">
+    <div class="test-title-group">
+      <h1 class="test-title">DroneDrill AI · Visuals Contact Sheet</h1>
+      <span class="badge-adaptive" style="font-size: 10px; padding: 2px 6px;">4 Terrains &times; 3 Times</span>
+    </div>
+
+    <div class="test-controls-bar">
+      <div class="ctrl-item">
+        <label for="sel-weather">Weather:</label>
+        <select id="sel-weather">
+          <option value="clear" selected>Clear</option>
+          <option value="haze">Haze</option>
+          <option value="fog">Fog</option>
+          <option value="rain">Rain</option>
+          <option value="dust">Dust</option>
+        </select>
+      </div>
+
+      <div class="ctrl-item">
+        <label for="sel-sensor">Sensor:</label>
+        <select id="sel-sensor">
+          <option value="EO" selected>EO (Color)</option>
+          <option value="thermal">Thermal (White-Hot)</option>
+        </select>
+      </div>
+
+      <div class="ctrl-item">
+        <label for="sel-degradation">Degradation:</label>
+        <select id="sel-degradation">
+          <option value="none" selected>None</option>
+          <option value="noise">Noise Grain</option>
+          <option value="pixelation">Pixelation (50%)</option>
+          <option value="dropout">Dropout (Signal Loss)</option>
+          <option value="occlusion">Occlusion</option>
+        </select>
+      </div>
+
+      <a href="simulator.html" class="btn-nav-back">&larr; Return to Simulator</a>
+    </div>
+  </header>
+
+  <main class="test-grid-container" id="test-grid">
+    <!-- Populated by JavaScript with 12 combinations -->
+  </main>
+
+  <script src="renderer.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const TERRAINS = ['open', 'urban', 'forest', 'hills'];
+      const TIMES = ['day', 'dusk', 'night'];
+
+      const grid = document.getElementById('test-grid');
+      const selWeather = document.getElementById('sel-weather');
+      const selSensor = document.getElementById('sel-sensor');
+      const selDegradation = document.getElementById('sel-degradation');
+
+      const cards = [];
+
+      // Build 12 grid cards
+      TERRAINS.forEach(terrain => {
+        TIMES.forEach(tod => {
+          const card = document.createElement('div');
+          card.className = 'card-canvas';
+
+          const horizonFrac = window.DroneDrillRenderer.getHorizonFraction(terrain, tod);
+          const horizonPct = Math.round(horizonFrac * 100);
+
+          card.innerHTML = `
+            <div class="card-canvas-header">
+              <span class="card-canvas-title">${terrain.toUpperCase()} &middot; ${tod.toUpperCase()}</span>
+              <span class="card-canvas-meta">Horizon: ${horizonPct}%</span>
+            </div>
+            <div class="card-canvas-body">
+              <canvas width="340" height="200" data-terrain="${terrain}" data-tod="${tod}"></canvas>
+            </div>
+            <div class="card-canvas-footer">
+              <span>Sky Rect: Y [8% &ndash; ${Math.round((horizonFrac - 0.04) * 100)}%]</span>
+              <span>Contacts: Drone, Bird, Balloon</span>
+            </div>
+          `;
+
+          grid.appendChild(card);
+          const canvas = card.querySelector('canvas');
+          cards.push({
+            canvas,
+            ctx: canvas.getContext('2d'),
+            terrain,
+            tod,
+            trailState: {},
+          });
+        });
+      });
+
+      let simTime = 4.0;
+      let lastTs = performance.now();
+
+      function animationLoop(ts) {
+        const dt = Math.min(0.1, (ts - lastTs) / 1000);
+        lastTs = ts;
+        simTime += dt;
+
+        const weather = selWeather.value;
+        const sensor = selSensor.value;
+        const degradation = selDegradation.value;
+
+        cards.forEach(c => {
+          // 3 demo objects safely placed in sky
+          const activeObjects = [
+            {
+              id: 'demo_drone',
+              appearance: 'multirotor',
+              true_class: 'multirotor',
+              x_m: -60 + Math.sin(simTime * 0.4) * 40,
+              y_m: 850,
+              alt_m: 140 + Math.sin(simTime * 0.6) * 10,
+              speed_mps: 8,
+              heading_deg: 75,
+              detected: false,
+            },
+            {
+              id: 'demo_bird',
+              appearance: 'bird',
+              true_class: 'bird',
+              x_m: 140 + Math.sin(simTime * 0.8) * 30,
+              y_m: 650,
+              alt_m: 90 + Math.sin(simTime * 1.2) * 12,
+              speed_mps: 12,
+              heading_deg: 120,
+              detected: false,
+            },
+            {
+              id: 'demo_balloon',
+              appearance: 'balloon',
+              true_class: 'balloon',
+              x_m: -160 + Math.sin(simTime * 0.2) * 15,
+              y_m: 1100,
+              alt_m: 170 + Math.sin(simTime * 0.3) * 6,
+              speed_mps: 2,
+              heading_deg: 10,
+              detected: false,
+            },
+          ];
+
+          const state = {
+            factors: {
+              terrain: c.terrain,
+              time_of_day: c.tod,
+              weather,
+              degradation,
+              sensor_mode: sensor,
+            },
+            activeObjects,
+            simTime,
+            visibilityWindows: {},
+            selectedObjectId: null,
+            trailState: c.trailState,
+          };
+
+          const view = {
+            width: c.canvas.width,
+            height: c.canvas.height,
+            sensor,
+            zoom: 1.0,
+            cropCenter: null,
+            isPanel: false,
+            showHUD: false,
+          };
+
+          window.renderFrame(c.ctx, state, view);
+        });
+
+        requestAnimationFrame(animationLoop);
+      }
+
+      requestAnimationFrame(animationLoop);
+
+      // Event listeners for controls to trigger redraw
+      [selWeather, selSensor, selDegradation].forEach(el => {
+        el.addEventListener('change', () => {
+          // Immediate refresh loop handles it
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

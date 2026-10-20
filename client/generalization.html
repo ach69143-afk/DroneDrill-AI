@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Generalization & Rote Learning Report</title>
+  <link rel="stylesheet" href="style.css?v=sakshi">
+</head>
+<body>
+
+  <!-- Offline/Error Banner -->
+  <div id="api-banner" class="api-banner">
+    <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+    <button class="btn-api-retry" id="btn-api-retry" onclick="location.reload()">Retry</button>
+  </div>
+
+  <!-- Top Navigation Bar (SAKSHI App Shell) -->
+  <header class="top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <h1 class="brand-title">DRONEDRILL AI</h1>
+          <span class="brand-badge">GENERALIZATION</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="condition-chips">
+      <div class="chip chip-ok" id="chip-system-ready"><span class="chip-dot"></span><span>SYSTEM READY</span></div>
+    </div>
+
+    <div class="header-controls">
+      <span class="chip highlight"><span class="chip-dot"></span><span id="gen-active-trainee">Trainee: demo_trainee_01</span></span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout" style="grid-template-columns: 240px 1fr;">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Train</span>
+          <a href="simulator.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Reference</span>
+          <a href="guide.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Quick Trainee Info Box -->
+      <div class="current-session-box" style="margin-top: auto;">
+        <span class="session-box-title">Evaluation Target</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Trainee</span>
+          <span class="metric-value" id="side-trainee-id">demo_trainee_01</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Held-Out Split</span>
+          <span class="metric-value">108 Cells (20%)</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="page-container">
+
+      <!-- Header & Trainee Selection Toolbar -->
+      <div class="card-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h2 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: 0.8px; margin: 0;">
+              HELD-OUT GENERALIZATION & ROTE MEMORIZATION REPORT
+            </h2>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted);">
+              Measuring cognitive skill transfer to unseen scenario factor cells vs. template memorization
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="filter-label">Trainee:</span>
+            <select id="select-trainee" class="select-custom" style="padding: 6px 12px; font-size: 12px; width: 220px;">
+              <option value="demo_trainee_01">demo_trainee_01</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="synthetic-badge-container" style="margin-top: 10px; display: none;">
+          <span class="chip highlight"><span class="chip-dot"></span><span>DEMO DATA (synthetic)</span></span>
+        </div>
+      </div>
+
+      <!-- Metric Cards (Score, Rote Indicator, Coverage) -->
+      <div class="grid-3-col" style="grid-template-columns: repeat(3, 1fr); gap: 16px;">
+
+        <!-- Card 1: Generalization Score -->
+        <div class="stat-card" id="card-gen-score">
+          <span class="stat-label">Generalization Score</span>
+          <span class="stat-card-val" id="val-gen-score" style="color: var(--green);">--</span>
+          <span class="stat-note" id="note-gen-score">Mean score on held-out test cells</span>
+        </div>
+
+        <!-- Card 2: Rote Indicator -->
+        <div class="stat-card" id="card-rote-indicator">
+          <span class="stat-label">Rote Gap Index</span>
+          <span class="stat-card-val" id="val-rote-indicator">--</span>
+          <span class="stat-note" id="note-rote-indicator">Practice vs. Test performance gap</span>
+        </div>
+
+        <!-- Card 3: Factor Space Coverage -->
+        <div class="stat-card">
+          <span class="stat-label">Practice Factor Coverage</span>
+          <span class="stat-card-val" id="val-coverage">--%</span>
+          <span class="stat-note" id="note-coverage">Unique practice cells explored</span>
+        </div>
+
+      </div>
+
+      <!-- Not Enough Data State -->
+      <div id="gen-empty-state" class="state-box" style="display: none; background: var(--panel); border: var(--card-border); border-radius: var(--card-radius); box-shadow: var(--card-glow);">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="state-title" style="color: var(--amber);">NOT ENOUGH TEST DATA YET</div>
+        <div class="state-desc" style="max-width: 500px;">
+          This trainee has not yet completed evaluation sessions in <strong>Test Mode</strong> (held-out condition cells). Without held-out test data, generalization cannot be validated against rote memorization.
+        </div>
+        <a href="simulator.html" class="btn-primary" style="margin-top: 10px; text-decoration: none; padding: 10px 20px;">
+          LAUNCH TEST DRILL IN SIMULATOR
+        </a>
+      </div>
+
+      <!-- Chart Panel: Practice vs Test Timeline -->
+      <div class="card-panel" id="gen-chart-panel">
+        <div class="card-title">
+          <span>PRACTICE VS. HELD-OUT TEST PERFORMANCE TRAJECTORY</span>
+          <div style="display: flex; gap: 10px;">
+            <span class="chip" style="font-size: 10px; border-color: rgba(239, 68, 68, 0.4);"><span class="chip-dot" style="background: #e11d2e;"></span><span>Practice</span></span>
+            <span class="chip chip-ok" style="font-size: 10px;"><span class="chip-dot" style="background: #22c55e;"></span><span>Test Mode</span></span>
+          </div>
+        </div>
+
+        <div style="height: 260px; width: 100%; position: relative; margin-top: 10px;">
+          <canvas id="genTimelineChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Plain Language Explanation Card -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>WHAT THIS REPORT TELLS YOU</span>
+          <span class="chip"><span class="chip-dot"></span><span>INTERPRETATION GUIDE</span></span>
+        </div>
+        <div style="font-size: 13.5px; line-height: 1.6; color: var(--text);">
+          <p>
+            <strong>Generalization Score:</strong> Evaluates an operator's threat recognition fidelity exclusively when confronted with scenario condition cells they have <em>never practiced</em>. 108 of the 540 procedural cells are strictly held out.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px;">
+            <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--green);">ROTE GAP < 10%</div>
+              <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+                <strong>Robust Generalization:</strong> Operator applies core visual and trajectory cues equally well to new lighting, terrain, and weather combinations.
+              </div>
+            </div>
+            <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--amber);">ROTE GAP 10% - 25%</div>
+              <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+                <strong>Partial Overfitting:</strong> Performance drops moderately under unfamiliar conditions. Adaptive selector recommends cross-factor drills.
+              </div>
+            </div>
+            <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--red-text);">ROTE GAP > 25%</div>
+              <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+                <strong>Template Memorization:</strong> High practice scores reflect repetition of familiar drills. Operator requires remediation on degraded sensors.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js?v=v2"></script>
+  <script src="vendor/chart.min.js?v=sakshi"></script>
+  <script src="vendor/chart_util.js?v=sakshi"></script>
+  <script>
+    let currentTrainees = [];
+    let timelineChart = null;
+
+    function getActiveTrainee() {
+      return localStorage.getItem('dronedrill_trainee_id') || 
+             (window.CONFIG && typeof CONFIG.getActiveTraineeId === 'function' ? CONFIG.getActiveTraineeId() : null) || 
+             (window.CONFIG && CONFIG.TRAINEE_ID ? CONFIG.TRAINEE_ID : 'demo_trainee_01');
+    }
+
+    async function initPage() {
+      await loadTrainees();
+      const storedId = getActiveTrainee();
+      const sel = document.getElementById('select-trainee');
+      if (sel && storedId) sel.value = storedId;
+      loadReport();
+    }
+
+    async function loadTrainees() {
+      try {
+        const res = await fetch(`${CONFIG.API_BASE}/trainees`);
+        if (!res.ok) return;
+        const data = await res.json();
+        currentTrainees = Array.isArray(data) ? data : (data.trainees || []);
+        const sel = document.getElementById('select-trainee');
+        if (!sel) return;
+        sel.innerHTML = '';
+        currentTrainees.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = `${t.name || t.id} (${t.id})${t.is_demo ? ' [Synthetic]' : ''}`;
+          sel.appendChild(opt);
+        });
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+
+    async function loadReport() {
+      const traineeSel = document.getElementById('select-trainee');
+      const traineeId = (traineeSel && traineeSel.value) ? traineeSel.value : getActiveTrainee();
+      CONFIG.TRAINEE_ID = traineeId;
+
+      const sideId = document.getElementById('side-trainee-id');
+      const topId = document.getElementById('gen-active-trainee');
+      if (sideId) sideId.textContent = traineeId;
+      if (topId) topId.textContent = `Trainee: ${traineeId}`;
+
+      const tObj = currentTrainees.find(t => t.id === traineeId);
+      const isDemo = tObj ? !!tObj.is_demo : traineeId.startsWith('demo_') || traineeId.startsWith('t');
+      const badgeBox = document.getElementById('synthetic-badge-container');
+      if (badgeBox) badgeBox.style.display = isDemo ? 'block' : 'none';
+
+      const banner = document.getElementById('api-banner');
+
+      try {
+        const [genRes, perfRes] = await Promise.all([
+          fetch(`${CONFIG.API_BASE}/trainee/${encodeURIComponent(traineeId)}/generalization`),
+          fetch(`${CONFIG.API_BASE}/trainee/${encodeURIComponent(traineeId)}/performance`),
+        ]);
+
+        if (!genRes.ok) throw new Error(`HTTP ${genRes.status}`);
+        const genData = await genRes.json();
+        const perfData = perfRes.ok ? await perfRes.json() : { sessions: [] };
+        if (banner) banner.style.display = 'none';
+
+        renderGeneralizationData(genData, perfData.sessions || []);
+      } catch (err) {
+        console.error('Error loading generalization data:', err);
+        if (banner) banner.style.display = 'flex';
+      }
+    }
+
+    function renderGeneralizationData(genData, sessions) {
+      const genScoreEl = document.getElementById('val-gen-score');
+      const roteEl = document.getElementById('val-rote-indicator');
+      const covEl = document.getElementById('val-coverage');
+      const emptyState = document.getElementById('gen-empty-state');
+      const chartPanel = document.getElementById('gen-chart-panel');
+
+      const genScore = genData.generalization_score;
+      const rote = genData.rote_indicator;
+      const cov = genData.coverage_report || {};
+
+      // Coverage
+      if (cov.coverage !== undefined) {
+        covEl.textContent = `${Math.round(cov.coverage * 100)}%`;
+        document.getElementById('note-coverage').textContent = `${cov.seen || 0} of ${cov.total || 432} practice cells explored`;
+      }
+
+      // Check if we have valid test data
+      const testSessions = sessions.filter(s => (s.mode || '').toLowerCase() === 'test');
+      const hasTestData = genScore !== null && genScore !== undefined && !isNaN(genScore) && isFinite(genScore) && testSessions.length > 0;
+
+      if (!hasTestData) {
+        genScoreEl.textContent = 'N/A';
+        genScoreEl.style.color = 'var(--muted)';
+        roteEl.textContent = 'N/A';
+        roteEl.style.color = 'var(--muted)';
+        emptyState.style.display = 'flex';
+        chartPanel.style.display = 'none';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      chartPanel.style.display = 'block';
+
+      // Score
+      const genScorePct = Math.round(genScore * 100);
+      genScoreEl.textContent = `${genScorePct}%`;
+      genScoreEl.style.color = genScorePct >= 75 ? 'var(--green)' : (genScorePct < 50 ? 'var(--red-text)' : 'var(--amber)');
+
+      // Rote Indicator
+      const rotePct = Math.round((rote || 0) * 100);
+      roteEl.textContent = `${rotePct >= 0 ? '+' : ''}${rotePct}%`;
+      if (rotePct < 10) {
+        roteEl.style.color = 'var(--green)';
+        document.getElementById('note-rote-indicator').textContent = 'Robust transfer (< 10% gap)';
+      } else if (rotePct <= 25) {
+        roteEl.style.color = 'var(--amber)';
+        document.getElementById('note-rote-indicator').textContent = 'Moderate template bias (10-25%)';
+      } else {
+        roteEl.style.color = 'var(--red-text)';
+        document.getElementById('note-rote-indicator').textContent = 'High memorization risk (> 25%)';
+      }
+
+      renderTimelineChart(sessions);
+    }
+
+    function renderTimelineChart(sessions) {
+      const ctx = document.getElementById('genTimelineChart');
+      if (!ctx) return;
+
+      if (timelineChart) {
+        timelineChart.destroy();
+        timelineChart = null;
+      }
+
+      // Chronological sessions
+      const sorted = [...sessions].sort((a, b) => new Date(a.date) - new Date(b.date));
+      const labels = sorted.map((_, i) => `#${i + 1}`);
+
+      const practiceData = sorted.map(s => (s.mode || 'practice').toLowerCase() === 'practice' && s.overall !== null ? Math.round(s.overall * 100) : null);
+      const testData = sorted.map(s => (s.mode || '').toLowerCase() === 'test' && s.overall !== null ? Math.round(s.overall * 100) : null);
+
+      timelineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Practice Mode',
+              data: practiceData,
+              borderColor: '#2f6bff',
+              backgroundColor: 'rgba(47, 107, 255, 0.12)',
+              borderWidth: 2,
+              pointBackgroundColor: '#2f6bff',
+              pointRadius: 4,
+              spanGaps: true,
+              tension: 0.25,
+            },
+            {
+              label: 'Test Mode (Held-Out)',
+              data: testData,
+              borderColor: '#22c55e',
+              backgroundColor: 'rgba(34, 197, 94, 0.15)',
+              borderWidth: 2.5,
+              pointBackgroundColor: '#22c55e',
+              pointRadius: 6,
+              spanGaps: true,
+              tension: 0.25,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: {
+                color: '#8e8e99',
+                font: { family: "'JetBrains Mono', monospace", size: 10 },
+                callback: v => `${v}%`,
+              },
+              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+            },
+            x: {
+              ticks: {
+                color: '#8e8e99',
+                font: { family: "'JetBrains Mono', monospace", size: 10 },
+              },
+              grid: { color: 'rgba(255, 255, 255, 0.04)' },
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#e6eaf2',
+                font: { family: "'Inter', ui-sans-serif, 'Segoe UI', system-ui, sans-serif", size: 12, weight: 600 }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initPage();
+      document.getElementById('select-trainee').addEventListener('change', loadReport);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Scenario Library</title>
+  <link rel="stylesheet" href="style.css?v=sakshi">
+</head>
+<body>
+
+  <!-- Offline/Error Banner -->
+  <div id="api-banner" class="api-banner">
+    <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+    <button class="btn-api-retry" id="btn-api-retry" onclick="location.reload()">Retry</button>
+  </div>
+
+  <!-- Top Navigation Bar (SAKSHI App Shell) -->
+  <header class="top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <h1 class="brand-title">DRONEDRILL AI</h1>
+          <span class="brand-badge">LIBRARY</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="condition-chips">
+      <div class="chip chip-ok" id="chip-system-ready"><span class="chip-dot"></span><span>SYSTEM READY</span></div>
+    </div>
+
+    <div class="header-controls">
+      <span class="chip"><span class="chip-dot"></span><span id="lib-count-chip">Catalog: Loading...</span></span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout" style="grid-template-columns: 240px 1fr;">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Train</span>
+          <a href="simulator.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Reference</span>
+          <a href="guide.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Quick Trainee Info Box -->
+      <div class="current-session-box" style="margin-top: auto;">
+        <span class="session-box-title">Practice Library</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Access Mode</span>
+          <span class="metric-value">Practice Only</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Source</span>
+          <span class="metric-value">Hand-Authored</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="page-container">
+
+      <!-- Action & Header Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: 0.8px; margin: 0;">
+            SCRIPTED SCENARIO CATALOG
+          </h2>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted);">
+            Hand-authored baseline training drills across verified practice cells
+          </span>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <a href="simulator.html?autostart=1" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>GENERATE PROCEDURAL SCENARIO</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Filter Toolbar -->
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <span class="filter-label">Time:</span>
+          <select id="filter-time" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Times</option>
+            <option value="day">Day</option>
+            <option value="dusk">Dusk</option>
+            <option value="night">Night</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Weather:</span>
+          <select id="filter-weather" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Weather</option>
+            <option value="clear">Clear</option>
+            <option value="haze">Haze</option>
+            <option value="dust">Dust</option>
+            <option value="rain">Rain</option>
+            <option value="fog">Fog</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Terrain:</span>
+          <select id="filter-terrain" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Terrains</option>
+            <option value="open">Open</option>
+            <option value="urban">Urban</option>
+            <option value="forest">Forest</option>
+            <option value="hills">Hills</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Sensor:</span>
+          <select id="filter-sensor" class="select-custom" style="padding: 4px 8px; font-size: 11px;">
+            <option value="">All Sensors</option>
+            <option value="eo">Electro-Optical (EO)</option>
+            <option value="thermal">Thermal (IR)</option>
+            <option value="radar">Radar-Style</option>
+          </select>
+        </div>
+
+        <div class="filter-group" style="margin-left: auto;">
+          <input type="text" id="filter-search" class="select-custom" placeholder="Search title or keywords..." style="padding: 4px 10px; font-size: 11px; width: 180px;">
+        </div>
+      </div>
+
+      <!-- Scenario Cards Container -->
+      <div id="scenarios-container" class="scenario-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="scenarios-empty" class="state-box" style="display: none;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <div class="state-title">NO MATCHING SCENARIOS FOUND</div>
+        <div class="state-desc">No scripted training scenarios match the active filter criteria. Try resetting the filters or launch a procedural scenario.</div>
+        <button class="nav-btn" onclick="resetFilters()" style="border: 1px solid var(--border-red); padding: 8px 16px; margin-top: 8px;">Reset Filters</button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="scenarios-loading" class="state-box">
+        <span class="spinner"></span>
+        <div class="state-title" style="font-size: 18px;">LOADING SCENARIO LIBRARY...</div>
+        <div class="state-desc" style="font-family: var(--font-mono); font-size: 11px;">Connecting to GET /scenarios</div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js?v=sakshi"></script>
+  <script>
+    let allScenarios = [];
+
+    async function loadScenarios() {
+      const loadingEl = document.getElementById('scenarios-loading');
+      const emptyEl = document.getElementById('scenarios-empty');
+      const containerEl = document.getElementById('scenarios-container');
+      const countChip = document.getElementById('lib-count-chip');
+      const banner = document.getElementById('api-banner');
+
+      try {
+        loadingEl.style.display = 'flex';
+        emptyEl.style.display = 'none';
+
+        const res = await fetch(`${CONFIG.API_BASE}/scenarios`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (banner) banner.style.display = 'none';
+
+        allScenarios = data.scenarios || [];
+        if (countChip) countChip.textContent = `Catalog: ${allScenarios.length} Scenarios`;
+        renderScenarios();
+      } catch (err) {
+        console.error('Failed to load scenarios:', err);
+        if (banner) banner.style.display = 'flex';
+        loadingEl.style.display = 'none';
+        emptyEl.style.display = 'flex';
+        emptyEl.querySelector('.state-title').textContent = 'API SERVER UNREACHABLE';
+        emptyEl.querySelector('.state-desc').textContent = 'Could not fetch scenario library from backend. Ensure FastAPI server is running on port 8000.';
+      } finally {
+        loadingEl.style.display = 'none';
+      }
+    }
+
+    function renderScenarios() {
+      const containerEl = document.getElementById('scenarios-container');
+      const emptyEl = document.getElementById('scenarios-empty');
+
+      const filterTime = document.getElementById('filter-time').value.toLowerCase();
+      const filterWeather = document.getElementById('filter-weather').value.toLowerCase();
+      const filterTerrain = document.getElementById('filter-terrain').value.toLowerCase();
+      const filterSensor = document.getElementById('filter-sensor').value.toLowerCase();
+      const search = document.getElementById('filter-search').value.toLowerCase().trim();
+
+      const filtered = allScenarios.filter(s => {
+        const cell = s.cell || [];
+        const tod = (cell[0] || '').toLowerCase();
+        const weather = (cell[1] || '').toLowerCase();
+        const terrain = (cell[2] || '').toLowerCase();
+        const sensor = (cell[3] || '').toLowerCase();
+
+        if (filterTime && tod !== filterTime) return false;
+        if (filterWeather && weather !== filterWeather) return false;
+        if (filterTerrain && terrain !== filterTerrain) return false;
+        if (filterSensor && sensor !== filterSensor) return false;
+
+        if (search) {
+          const text = `${s.id} ${s.title} ${s.description}`.toLowerCase();
+          if (!text.includes(search)) return false;
+        }
+        return true;
+      });
+
+      containerEl.innerHTML = '';
+
+      if (filtered.length === 0) {
+        emptyEl.style.display = 'flex';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      filtered.forEach(scen => {
+        const cell = scen.cell || [];
+        const tod = cell[0] || 'day';
+        const weather = cell[1] || 'clear';
+        const terrain = cell[2] || 'open';
+        const sensor = cell[3] || 'eo';
+        const deg = cell[4] || 'none';
+        const dist = cell[5] || 'none';
+
+        const isSwarm = (scen.object_count && scen.object_count >= 8) || 
+                        (scen.title && scen.title.toLowerCase().includes('swarm')) ||
+                        (scen.description && scen.description.toLowerCase().includes('swarm'));
+
+        const card = document.createElement('div');
+        card.className = `scenario-card ${isSwarm ? 'card-swarm' : ''}`;
+
+        card.innerHTML = `
+          <div class="scenario-header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+              <span class="scenario-title">${escapeHtml(scen.title || scen.id)}</span>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 10px; color: var(--red-text); letter-spacing: 0.5px;">ID: ${escapeHtml(scen.id)}</span>
+            <p class="scenario-desc" style="margin-top: 6px;">${escapeHtml(scen.description || 'Procedurally verified practice scenario.')}</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="scenario-tags">
+              <span class="chip">${tod.toUpperCase()}</span>
+              <span class="chip">${weather.toUpperCase()}</span>
+              <span class="chip">${terrain.toUpperCase()}</span>
+              <span class="chip">${sensor.toUpperCase()}</span>
+              ${deg !== 'none' ? `<span class="chip highlight">${deg.toUpperCase()}</span>` : ''}
+              ${dist !== 'none' ? `<span class="chip highlight">${dist.toUpperCase()}</span>` : ''}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px;">
+              <div style="display: flex; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--muted);">
+                <span>Targets: <strong style="color: var(--text);">${scen.object_count || 'Multi'}</strong></span>
+                <span>Diff: <strong style="color: var(--text);">${scen.difficulty_index !== undefined ? Math.round(scen.difficulty_index * 100) + '%' : '50%'}</strong></span>
+              </div>
+              <a href="simulator.html?scripted_id=${encodeURIComponent(scen.id)}" class="btn-primary" style="padding: 6px 14px; font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <span>LAUNCH DRILL</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </a>
+            </div>
+          </div>
+        `;
+
+        containerEl.appendChild(card);
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-time').value = '';
+      document.getElementById('filter-weather').value = '';
+      document.getElementById('filter-terrain').value = '';
+      document.getElementById('filter-sensor').value = '';
+      document.getElementById('filter-search').value = '';
+      renderScenarios();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadScenarios();
+      ['filter-time', 'filter-weather', 'filter-terrain', 'filter-sensor'].forEach(id => {
+        document.getElementById(id).addEventListener('change', renderScenarios);
+      });
+      document.getElementById('filter-search').addEventListener('input', renderScenarios);
+    });
+  </script>
+</body>
+</html>

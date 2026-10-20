@@ -1,0 +1,60 @@
+{
+  "scenario_id": "scripted_04_urban_clutter_mixed",
+  "title": "Urban Clutter Occlusion Mixed Classes",
+  "description": "Challenging urban environment with structural line-of-sight occlusions, background sensor clutter, and mixed target classes (multirotor, balloon, and fixed-wing UAV).",
+  "source": "scripted",
+  "cell": [
+    "night",
+    "fog",
+    "urban",
+    "thermal",
+    "occlusion",
+    "clutter"
+  ],
+  "factors": {
+    "time_of_day": "night",
+    "weather": "fog",
+    "terrain": "urban",
+    "sensor_mode": "thermal",
+    "degradation": "occlusion",
+    "distractors": "clutter",
+    "object_count": "2-3",
+    "motion_pattern": "erratic",
+    "speed_band": "med",
+    "altitude_band": "low",
+    "bearing_sector": "NW"
+  },
+  "objects": [
+    {
+      "id": "target_drone_01",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [-1100.0, 1100.0, 65.0],
+      "velocity": [14.0, -12.0, 0.5],
+      "appears_at_time": 0.0
+    },
+    {
+      "id": "target_aerostat_02",
+      "true_class": "balloon",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [-800.0, 1400.0, 95.0],
+      "velocity": [2.0, -1.5, 0.1],
+      "appears_at_time": 3.0
+    },
+    {
+      "id": "target_recon_03",
+      "true_class": "fixed_wing_uav",
+      "true_threat_level": 3,
+      "behaviour_label": "suspicious",
+      "start_position": [-1500.0, 800.0, 120.0],
+      "velocity": [22.0, -8.0, -0.2],
+      "appears_at_time": 5.0
+    }
+  ],
+  "duration_s": 75.0,
+  "noise_windows": 7,
+  "difficulty_index": 0.84,
+  "fingerprint": "scripted_fp_urban_clutter_mixed_04"
+}

@@ -1,0 +1,42 @@
+{
+  "scenario_id": "scripted_06_rain_noise_unknown",
+  "title": "Rain Noise Unknown Object",
+  "description": "Inclement weather drill under heavy rainfall and thermal sensor noise, presenting an unidentified track with erratic flight characteristics.",
+  "source": "scripted",
+  "cell": [
+    "night",
+    "rain",
+    "forest",
+    "thermal",
+    "noise",
+    "clutter"
+  ],
+  "factors": {
+    "time_of_day": "night",
+    "weather": "rain",
+    "terrain": "forest",
+    "sensor_mode": "thermal",
+    "degradation": "noise",
+    "distractors": "clutter",
+    "object_count": "1",
+    "motion_pattern": "erratic",
+    "speed_band": "med",
+    "altitude_band": "med",
+    "bearing_sector": "W"
+  },
+  "objects": [
+    {
+      "id": "unidentified_track_01",
+      "true_class": "unknown",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [-150.0, 1500.0, 160.0],
+      "velocity": [5.0, -12.0, 0.0],
+      "appears_at_time": 0.0
+    }
+  ],
+  "duration_s": 60.0,
+  "noise_windows": 7,
+  "difficulty_index": 0.76,
+  "fingerprint": "scripted_fp_rain_noise_unknown_06"
+}

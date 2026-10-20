@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Adaptive Counter-Drone Simulator</title>
+  <link rel="stylesheet" href="style.css?v=skyready">
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('demo') === '1' || urlParams.has('terrain') || urlParams.has('autostart')) {
+      window.location.replace('simulator.html' + window.location.search);
+    }
+  </script>
+</head>
+<body class="landing-page-body">
+
+  <!-- Background Tactical Radar Grid Animation -->
+  <div class="landing-grid-bg">
+    <div class="landing-radar-sweep"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar landing-top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <span class="brand-title">DRONEDRILL AI</span>
+          <span class="brand-badge">ADAPTIVE TRAINER</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="top-right-tools">
+      <span class="landing-top-tag">TEAM NEXXGENX</span>
+    </div>
+  </header>
+
+  <!-- Main Hero Content Container -->
+  <main class="landing-main-layout">
+    <div class="landing-grid-container">
+
+      <!-- Left Column: Primary Action & Value Proposition -->
+      <section class="landing-left-col">
+        <div class="landing-status-tag">
+          <span class="pulse-green-dot"></span>
+          SCENARIO ENGINE ACTIVE
+        </div>
+
+        <h1 class="landing-headline">
+          Train for the sky <span class="gradient-blue-violet">you haven't seen.</span>
+        </h1>
+
+        <div class="landing-quote-box">
+          <p class="landing-quote-text">
+            &ldquo;Most trainers score you on scenarios you have already practised. DroneDrill AI measures what you can do on the ones you have not.&rdquo;
+          </p>
+          <div class="landing-quote-sub">
+            Procedural scenarios &mdash; degraded sensors &mdash; adaptive practice &mdash; held-out generalization test
+          </div>
+        </div>
+
+        <div class="landing-action-row">
+          <a href="simulator.html?autostart=1" class="btn-start-simulation" id="btn-start-simulation">
+            <span>START SIMULATION</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Capability Chips -->
+        <div class="landing-chips-row">
+          <span class="landing-chip chip-eo">EO</span>
+          <span class="landing-chip chip-thermal">THERMAL</span>
+          <span class="landing-chip chip-radar">RADAR-STYLE</span>
+          <span class="landing-chip chip-heldout">HELD-OUT TEST</span>
+        </div>
+      </section>
+
+      <!-- Right Column: Informational Card (No Buttons) -->
+      <section class="landing-right-col">
+        <div class="landing-info-card">
+          <div class="card-header-row">
+            <h2 class="landing-card-title">What you will do</h2>
+            <span class="card-badge-mono">WORKFLOW</span>
+          </div>
+
+          <div class="workflow-steps-list">
+            <div class="workflow-step">
+              <span class="step-badge badge-1">1</span>
+              <div class="step-text-col">
+                <span class="step-name">Detect</span>
+                <span class="step-desc">Acquire airborne targets across wide-angle electro-optical, thermal infrared, and compass radar scopes.</span>
+              </div>
+            </div>
+
+            <div class="workflow-step">
+              <span class="step-badge badge-2">2</span>
+              <div class="step-text-col">
+                <span class="step-name">Classify</span>
+                <span class="step-desc">Distinguish multirotor drones, fixed-wing UAVs, light aircraft, balloons, and biological distractors.</span>
+              </div>
+            </div>
+
+            <div class="workflow-step">
+              <span class="step-badge badge-3">3</span>
+              <div class="step-text-col">
+                <span class="step-name">Assess threat</span>
+                <span class="step-desc">Evaluate contact trajectory, speed, and approach vectors across Benign, Low, Elevated, and High tiers.</span>
+              </div>
+            </div>
+
+            <div class="workflow-step">
+              <span class="step-badge badge-4">4</span>
+              <div class="step-text-col">
+                <span class="step-name">Choose a simulated response</span>
+                <span class="step-desc">Execute rule-governed counter-drone protocols from monitoring to simulated electronic countermeasures.</span>
+              </div>
+            </div>
+
+            <div class="workflow-step">
+              <span class="step-badge badge-5">5</span>
+              <div class="step-text-col">
+                <span class="step-name">State your confidence</span>
+                <span class="step-desc">Calibrate personal certainty using subjective Brier probability ratings before engagement evaluation.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="landing-card-footer-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>8 scenarios per block &mdash; about 60-90 s each</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+</body>
+</html>

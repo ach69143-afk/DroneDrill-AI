@@ -1,0 +1,11 @@
+# DroneDrill AI — Python Dependencies (Pinned)
+fastapi==0.115.0
+uvicorn==0.30.6
+pydantic==2.13.4
+numpy==1.26.4
+scipy==1.17.1
+starlette==0.38.6
+gunicorn==23.0.0
+pytest==9.1.1
+anyio==4.14.2
+httpx==0.28.1

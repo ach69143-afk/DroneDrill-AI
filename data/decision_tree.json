@@ -1,0 +1,151 @@
+{
+  "_status": "Instructor-editable draft. Pending expert review. Not validated.",
+  "threat_levels": {
+    "0": "benign",
+    "1": "low",
+    "2": "elevated",
+    "3": "high"
+  },
+  "responses": [
+    "ignore",
+    "log_only",
+    "monitor",
+    "report_to_command",
+    "alert_unit",
+    "countermeasure_simulated"
+  ],
+  "rules": {
+    "bird|benign": {
+      "expected_threat_level": 0,
+      "responses": {
+        "ignore": 1.0,
+        "log_only": 0.5,
+        "monitor": 0.0,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "bird|suspicious": {
+      "expected_threat_level": 1,
+      "responses": {
+        "log_only": 1.0,
+        "monitor": 0.5,
+        "ignore": 0.0,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "balloon|benign": {
+      "expected_threat_level": 0,
+      "responses": {
+        "ignore": 1.0,
+        "log_only": 0.5,
+        "monitor": 0.0,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "balloon|suspicious": {
+      "expected_threat_level": 1,
+      "responses": {
+        "monitor": 1.0,
+        "report_to_command": 0.5,
+        "log_only": 0.0,
+        "ignore": 0.0,
+        "alert_unit": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "light_aircraft|benign": {
+      "expected_threat_level": 1,
+      "responses": {
+        "log_only": 1.0,
+        "monitor": 0.5,
+        "ignore": 0.0,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "light_aircraft|suspicious": {
+      "expected_threat_level": 2,
+      "responses": {
+        "report_to_command": 1.0,
+        "monitor": 0.5,
+        "alert_unit": 0.5,
+        "log_only": 0.0,
+        "ignore": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "multirotor|benign": {
+      "expected_threat_level": 1,
+      "responses": {
+        "monitor": 1.0,
+        "log_only": 0.5,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "ignore": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "multirotor|suspicious": {
+      "expected_threat_level": 3,
+      "responses": {
+        "alert_unit": 1.0,
+        "report_to_command": 0.5,
+        "countermeasure_simulated": 0.5,
+        "monitor": 0.0,
+        "log_only": 0.0,
+        "ignore": 0.0
+      }
+    },
+    "fixed_wing_uav|benign": {
+      "expected_threat_level": 1,
+      "responses": {
+        "monitor": 1.0,
+        "report_to_command": 0.5,
+        "log_only": 0.0,
+        "alert_unit": 0.0,
+        "ignore": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "fixed_wing_uav|suspicious": {
+      "expected_threat_level": 3,
+      "responses": {
+        "alert_unit": 1.0,
+        "report_to_command": 0.5,
+        "countermeasure_simulated": 0.5,
+        "monitor": 0.0,
+        "log_only": 0.0,
+        "ignore": 0.0
+      }
+    },
+    "unknown|benign": {
+      "expected_threat_level": 1,
+      "responses": {
+        "monitor": 1.0,
+        "log_only": 0.5,
+        "report_to_command": 0.0,
+        "alert_unit": 0.0,
+        "ignore": 0.0,
+        "countermeasure_simulated": 0.0
+      }
+    },
+    "unknown|suspicious": {
+      "expected_threat_level": 2,
+      "responses": {
+        "report_to_command": 1.0,
+        "monitor": 0.5,
+        "alert_unit": 0.5,
+        "countermeasure_simulated": 0.5,
+        "log_only": 0.0,
+        "ignore": 0.0
+      }
+    }
+  }
+}

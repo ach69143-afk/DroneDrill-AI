@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Sensor Guide & Recognition Cues</title>
+  <link rel="stylesheet" href="style.css?v=sakshi">
+</head>
+<body>
+
+  <!-- Offline/Error Banner -->
+  <div id="api-banner" class="api-banner">
+    <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+    <button class="btn-api-retry" id="btn-api-retry" onclick="location.reload()">Retry</button>
+  </div>
+
+  <!-- Top Navigation Bar (SAKSHI App Shell) -->
+  <header class="top-bar">
+    <div class="brand-section">
+      <div class="brand-logo-sq">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="brand-text-col">
+        <div class="brand-title-row">
+          <h1 class="brand-title">DRONEDRILL AI</h1>
+          <span class="brand-badge">GUIDE</span>
+        </div>
+        <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+      </div>
+    </div>
+
+    <div class="condition-chips">
+      <div class="chip chip-ok" id="chip-system-ready"><span class="chip-dot"></span><span>SYSTEM READY</span></div>
+    </div>
+
+    <div class="header-controls">
+      <span class="chip"><span class="chip-dot"></span><span>ABSTRACT RECOGNITION CUES</span></span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout" style="grid-template-columns: 240px 1fr;">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Train</span>
+          <a href="simulator.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Reference</span>
+          <a href="guide.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group">
+          <span class="sidebar-group-label">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Quick Trainee Info Box -->
+      <div class="current-session-box" style="margin-top: auto;">
+        <span class="session-box-title">Reference Standard</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Content</span>
+          <span class="metric-value">Abstract / Prototype</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Scope</span>
+          <span class="metric-value">Non-Operational</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="page-container">
+
+      <!-- Header Section -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>OPERATIONAL SENSOR GUIDE & TARGET RECOGNITION CUES</span>
+          <span class="chip"><span class="chip-dot"></span><span>ABSTRACT TRAINING REFERENCE</span></span>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 6px;">
+          This reference provides abstract cognitive recognition principles for differentiating drone threats from environmental clutter across multi-sensor feeds. It describes theoretical sensor capabilities, atmospheric degradation effects, and grading mechanics. Contains no classified or operational military tactics.
+        </p>
+      </div>
+
+      <!-- 1. Sensor Modalities Comparison -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>1. SENSOR MODALITY CHARACTERISTICS</span>
+          <span class="chip"><span class="chip-dot"></span><span>EO · THERMAL · RADAR</span></span>
+        </div>
+
+        <div class="grid-3-col" style="grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 10px;">
+
+          <!-- EO -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <strong style="font-family: var(--font-heading); font-size: 16px; color: var(--text);">ELECTRO-OPTICAL (EO)</strong>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">DAYLIGHT VISIBLE</span>
+            </div>
+            <p style="font-size: 12.5px; color: var(--muted); line-height: 1.45;">
+              Standard optical camera capturing high-spatial resolution visible light imagery in natural color.
+            </p>
+            <ul style="font-size: 12px; color: var(--text); padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+              <li><strong>Strengths:</strong> Highest silhouette clarity; true paint/color identification; fine mechanical detail.</li>
+              <li><strong>Vulnerabilities:</strong> Severely degraded by night darkness; blinded by direct sun glare; obscured by dense fog/smoke.</li>
+            </ul>
+          </div>
+
+          <!-- Thermal -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <strong style="font-family: var(--font-heading); font-size: 16px; color: var(--text);">THERMAL INFRARED (IR)</strong>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">WHITE-HOT LWIR</span>
+            </div>
+            <p style="font-size: 12.5px; color: var(--muted); line-height: 1.45;">
+              Long-wave infrared sensor detecting thermal differentials and blackbody emissivity. Targets appear with white-hot luminance.
+            </p>
+            <ul style="font-size: 12px; color: var(--text); padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+              <li><strong>Strengths:</strong> Operates identically day or night; reveals heated motors, ESCs, batteries, and ICE engines.</li>
+              <li><strong>Vulnerabilities:</strong> Thermal washout in heavy rain/moisture; ground solar reflection clutter.</li>
+            </ul>
+          </div>
+
+          <!-- Radar -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <strong style="font-family: var(--font-heading); font-size: 16px; color: var(--text);">RADAR-STYLE SCOPE</strong>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">DOPPLER KINEMATICS</span>
+            </div>
+            <p style="font-size: 12.5px; color: var(--muted); line-height: 1.45;">
+              Abstract range-bearing tactical scope visualizing target position, closure speed, and flight vectors.
+            </p>
+            <ul style="font-size: 12px; color: var(--text); padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+              <li><strong>Strengths:</strong> Completely immune to darkness and optical obscurants; immediate velocity vectors.</li>
+              <li><strong>Vulnerabilities:</strong> Multipath ground echoes; bird flock radar cross-section confusion.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. Environmental Degradation Matrix -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>2. ENVIRONMENTAL & ATMOSPHERIC SENSOR DEGRADATION</span>
+          <span class="chip"><span class="chip-dot"></span><span>FACTOR INTERACTIONS</span></span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="tactical-table">
+            <thead>
+              <tr>
+                <th>Environmental Factor</th>
+                <th>Electro-Optical Impact</th>
+                <th>Thermal Infrared Impact</th>
+                <th>Radar Scope Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Night Darkness</strong></td>
+                <td><span style="color: var(--red-text);">Critical Loss:</span> Relies solely on strobing navigation LEDs or skyglow contrast.</td>
+                <td><span style="color: var(--green);">Optimal:</span> Ambient coolness enhances target motor contrast.</td>
+                <td><span style="color: var(--green);">Zero Impact:</span> Active RF wave transmission unaffected.</td>
+              </tr>
+              <tr>
+                <td><strong>Fog & Haze</strong></td>
+                <td><span style="color: var(--red-text);">Severe Scattering:</span> Target contrast drops rapidly with range.</td>
+                <td><span style="color: var(--amber);">Thermal Washout:</span> Moisture absorbs infrared; lowers target contrast.</td>
+                <td><span style="color: var(--green);">Negligible:</span> Penetrates non-dense water droplets easily.</td>
+              </tr>
+              <tr>
+                <td><strong>Heavy Rain</strong></td>
+                <td><span style="color: var(--amber);">Optical Noise:</span> Streaks across lens; reduces target edge sharpness.</td>
+                <td><span style="color: var(--amber);">Surface Quenching:</span> Cold rainwater cools exposed airframe skin.</td>
+                <td><span style="color: var(--amber);">Clutter Echoes:</span> Backscatter noise appears across range rings.</td>
+              </tr>
+              <tr>
+                <td><strong>Dust Storm</strong></td>
+                <td><span style="color: var(--red-text);">Severe Occlusion:</span> Particulate scattering conceals distant small craft.</td>
+                <td><span style="color: var(--green);">Moderate Penetration:</span> Long wavelengths cut through fine dust.</td>
+                <td><span style="color: var(--green);">Zero Impact:</span> Micro-particles transparent to RF energy.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. Target Recognition Cues -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>3. TARGET CLASSIFICATION & RECOGNITION CUES</span>
+          <span class="chip"><span class="chip-dot"></span><span>5 AERIAL CLASSES</span></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+
+          <!-- Bird -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center;">
+            <div>
+              <strong style="color: var(--text); font-size: 15px;">BIRD</strong>
+              <span class="chip chip-ok" style="font-size: 9px; padding: 2px 6px; margin-top: 4px; display: inline-flex;">BENIGN WILDLIFE</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.45;">
+              <strong style="color: var(--text);">Kinematics:</strong> Erratic undulating flight path; wing flapping oscillation; low airspeed (&lt; 15 m/s).<br>
+              <strong style="color: var(--text);">Signatures:</strong> Low thermal contrast (feathers insulate core heat); low localized radar cross-section with periodic micro-Doppler wing flutter.
+            </div>
+          </div>
+
+          <!-- Balloon -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center;">
+            <div>
+              <strong style="color: var(--text); font-size: 15px;">BALLOON</strong>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px; margin-top: 4px; display: inline-flex;">PASSIVE DRIFT</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.45;">
+              <strong style="color: var(--text);">Kinematics:</strong> Passive wind-driven drift; zero maneuvering or waypoint holding; slow vertical climb or steady descent.<br>
+              <strong style="color: var(--text);">Signatures:</strong> Spherical optical profile; zero motor heat signature; stationary or low speed on radar without propulsion echoes.
+            </div>
+          </div>
+
+          <!-- Multirotor Drone -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border-red); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center;">
+            <div>
+              <strong style="color: var(--red-text); font-size: 15px;">MULTIROTOR</strong>
+              <span class="chip highlight" style="font-size: 9px; padding: 2px 6px; margin-top: 4px; display: inline-flex;">ACTIVE UAS THREAT</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.45;">
+              <strong style="color: var(--text);">Kinematics:</strong> Stationary hovering capability; sudden sharp pivot turns; variable speed; tight swarm coordination.<br>
+              <strong style="color: var(--text);">Signatures:</strong> Discrete hot motor pods (quad/hex layout) in thermal; high-frequency blade micro-Doppler modulation on radar.
+            </div>
+          </div>
+
+          <!-- Fixed-Wing UAV -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border-red); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center;">
+            <div>
+              <strong style="color: var(--red-text); font-size: 15px;">FIXED-WING UAV</strong>
+              <span class="chip highlight" style="font-size: 9px; padding: 2px 6px; margin-top: 4px; display: inline-flex;">RECON / STRIKE</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.45;">
+              <strong style="color: var(--text);">Kinematics:</strong> Sustained aerodynamic cruise (25-45 m/s); banked coordinated turns; cannot hover.<br>
+              <strong style="color: var(--text);">Signatures:</strong> Distinct straight or delta wing silhouette; concentrated rear motor or engine thermal plume; linear radar vector.
+            </div>
+          </div>
+
+          <!-- Light Aircraft -->
+          <div style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: center;">
+            <div>
+              <strong style="color: var(--text); font-size: 15px;">LIGHT AIRCRAFT</strong>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px; margin-top: 4px; display: inline-flex;">MANNED TRANSIT</span>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.45;">
+              <strong style="color: var(--text);">Kinematics:</strong> High airspeed (&gt; 50 m/s); non-evasive constant heading; high altitude profile.<br>
+              <strong style="color: var(--text);">Signatures:</strong> Large fuselage cross-section; high acoustic signature; continuous active transponder emission.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 4. How Scoring Works -->
+      <div class="card-panel">
+        <div class="card-title">
+          <span>4. HOW SESSION SCORING OPERATES</span>
+          <span class="chip"><span class="chip-dot"></span><span>SDT & SOP METRICS</span></span>
+        </div>
+        <div style="font-size: 13.5px; line-height: 1.6; color: var(--text);">
+          <p>
+            When a session completes, every clicked target and missed contact is analyzed against ground-truth simulation events:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px;">
+            <div style="background: var(--panel-2); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+              <strong style="color: var(--red-text); font-family: var(--font-mono); font-size: 12px;">SIGNAL DETECTION THEORY ($d'$)</strong>
+              <p style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+                Calculates hit rates against false alarms with loglinear correction. High scores require detecting true threats while ignoring ground clutter and birds.
+              </p>
+            </div>
+            <div style="background: var(--panel-2); padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+              <strong style="color: var(--red-text); font-family: var(--font-mono); font-size: 12px;">BRIER CONFIDENCE CALIBRATION</strong>
+              <p style="font-size: 12px; color: var(--muted); margin-top: 4px;">
+                Measures whether your self-reported confidence matches factual accuracy. Stating 95% confidence on an incorrect classification incurs a severe penalty.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js?v=sakshi"></script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroneDrill AI - Simulator</title>
+  <link rel="stylesheet" href="style.css?v=skyready">
+</head>
+<body>
+
+  <!-- Simulator App Root (Can enter Fullscreen via Fullscreen API or CSS fallback) -->
+  <div id="simulator-root" class="simulator-app-root">
+
+    <!-- Offline/Error Banner -->
+    <div id="api-banner" class="api-banner">
+      <span>API Server Offline (http://127.0.0.1:8000). Ensure the DroneDrill AI service is running.</span>
+      <button id="btn-api-retry" class="btn-api-retry">RETRY</button>
+    </div>
+
+    <!-- Top Navigation Bar / Fullscreen HUD -->
+    <header class="top-bar">
+      <div class="brand-section">
+        <div class="brand-logo-sq">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <div class="brand-text-col">
+          <div class="brand-title-row">
+            <h1 class="brand-title">DRONEDRILL AI</h1>
+            <span class="brand-badge">SIMULATOR</span>
+          </div>
+          <span class="brand-subtitle">DRONE-THREAT RECOGNITION TRAINER - ADAPTIVE SCENARIO SUITE</span>
+        </div>
+      </div>
+
+      <!-- Active Scenario Condition Chips (Caption above, coloured pill below) -->
+      <div class="condition-chips" id="condition-chips">
+        <div class="condition-chip-item">
+          <span class="chip-caption">STATUS</span>
+          <div class="chip pill-green" id="chip-system-ready">
+            <span class="chip-dot"></span><span>SYSTEM READY</span>
+          </div>
+        </div>
+        <div class="condition-chip-item">
+          <span class="chip-caption">TIME</span>
+          <div class="chip pill-amber" id="chip-tod">
+            <span class="chip-dot"></span><span id="chip-tod-val">Day</span>
+          </div>
+        </div>
+        <div class="condition-chip-item">
+          <span class="chip-caption">WEATHER</span>
+          <div class="chip pill-bluegrey" id="chip-weather">
+            <span class="chip-dot"></span><span id="chip-weather-val">Clear</span>
+          </div>
+        </div>
+        <div class="condition-chip-item">
+          <span class="chip-caption">TERRAIN</span>
+          <div class="chip pill-slategreen" id="chip-terrain">
+            <span class="chip-dot"></span><span id="chip-terrain-val">Open</span>
+          </div>
+        </div>
+        <div class="condition-chip-item">
+          <span class="chip-caption">DEGRADATION</span>
+          <div class="chip pill-green" id="chip-degradation">
+            <span class="chip-dot"></span><span id="chip-degradation-val">None</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Remaining Clock and Fullscreen Button -->
+      <div class="top-right-tools">
+        <div class="timer-box">
+          <span class="timer-label">Time Remaining</span>
+          <span class="timer-val" id="time-remaining-val">00:00</span>
+        </div>
+        <button class="btn-secondary" id="btn-toggle-fullscreen" title="Toggle Fullscreen (F)" style="padding: 6px 12px; font-size: 11px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+          <svg id="icon-fs-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <svg id="icon-fs-exit" style="display:none;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+          <span id="label-fullscreen">Fullscreen</span>
+        </button>
+      </div>
+    </header>
+
+  <!-- Main View Grid (100vh full-viewport, no page scroll) -->
+  <main class="main-layout">
+
+    <!-- 1. Left Sidebar Navigation (Internal Scroll, Settings Reachable) -->
+    <aside class="sidebar">
+      <div class="sidebar-nav-groups">
+
+        <!-- Group: Train (Blue) -->
+        <div class="sidebar-group" data-group="train">
+          <span class="sidebar-group-label group-train">Train</span>
+          <a href="simulator.html" class="nav-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+            Training View
+          </a>
+          <a href="scenarios.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Scenario Library
+          </a>
+        </div>
+
+        <!-- Group: Review (Violet) -->
+        <div class="sidebar-group" data-group="review">
+          <span class="sidebar-group-label group-review">Review</span>
+          <a href="history.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            Session History
+          </a>
+          <a href="aar.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            After Action (AAR)
+          </a>
+          <a href="skills.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            Skill Profile
+          </a>
+          <a href="generalization.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Generalization
+          </a>
+        </div>
+
+        <!-- Group: Instructor (Amber) -->
+        <div class="sidebar-group" data-group="instructor">
+          <span class="sidebar-group-label group-instructor">Instructor</span>
+          <a href="instructor.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Unit Overview
+          </a>
+          <a href="builder.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            Scenario Builder
+          </a>
+          <a href="decision-tree.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Decision Tree
+          </a>
+        </div>
+
+        <!-- Group: Reference (Green) -->
+        <div class="sidebar-group" data-group="reference">
+          <span class="sidebar-group-label group-reference">Reference</span>
+          <a href="guide.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Sensor Guide
+          </a>
+          <a href="about.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            About
+          </a>
+        </div>
+
+        <!-- Group: Settings -->
+        <div class="sidebar-group" data-group="settings">
+          <span class="sidebar-group-label group-settings">Settings</span>
+          <a href="settings.html" class="nav-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Current Session Metric Box (Pinned at Sidebar Bottom) -->
+      <div class="current-session-box">
+        <span class="session-box-title">Current Session</span>
+        <div class="session-metric-row">
+          <span class="metric-label">Block</span>
+          <span class="metric-value" id="val-session-block">Session 1/6</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Scenario</span>
+          <span class="metric-value" id="val-scenario-step">Scenario 1/8</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Mode</span>
+          <span class="badge-adaptive" id="badge-mode-val">Adaptive ON</span>
+        </div>
+        <div class="session-metric-row">
+          <span class="metric-label">Difficulty</span>
+          <span class="metric-value" id="val-difficulty">Medium</span>
+        </div>
+        <button class="btn-end-session" id="btn-end-session">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+          End Session
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Center Main Canvas Viewport -->
+    <section class="center-viewport" id="center-viewport">
+      <canvas id="main-canvas"></canvas>
+
+      <!-- Radar Overlay Scope (Top-Left of Viewport) -->
+      <div class="radar-widget-container">
+        <canvas id="radar-widget-canvas" width="120" height="120"></canvas>
+        <span class="radar-widget-label">RADAR 3KM</span>
+      </div>
+
+      <!-- Standby Overlay (Shown when no active drill running) -->
+      <div class="viewport-empty-state" id="viewport-empty-state">
+        <h2 class="empty-state-title">AIRSPACE MONITOR STANDBY</h2>
+        <p class="empty-state-desc">
+          Ready to initialize adaptive counter-drone tactical drills. System dynamically selects scenarios matching your Bayesian skill profile weaknesses across day, dusk, and night conditions.
+        </p>
+        <div class="action-buttons-group">
+          <button class="btn-primary" id="btn-start-next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            START ADAPTIVE DRILL
+          </button>
+          <button class="btn-secondary" id="btn-start-test">
+            TEST MODE (HELD-OUT)
+          </button>
+          <button class="btn-secondary" id="btn-open-scenarios">
+            LIBRARY
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Stacked Sensor Feeds Column (EO, Thermal, Radar) -->
+    <aside class="feeds-column">
+      <div class="feed-card active-primary" id="feed-card-eo" data-mode="EO">
+        <div class="feed-header">
+          <span class="feed-title">Electro-Optical</span>
+          <span class="feed-zoom" id="eo-feed-zoom">Zoom 1.0x</span>
+        </div>
+        <canvas id="feed-canvas-eo" class="feed-canvas" width="220" height="150"></canvas>
+      </div>
+
+      <div class="feed-card" id="feed-card-thermal" data-mode="thermal">
+        <div class="feed-header">
+          <span class="feed-title">Thermal IR</span>
+          <span class="feed-zoom" id="thermal-feed-zoom">IR W-Hot</span>
+        </div>
+        <canvas id="feed-canvas-thermal" class="feed-canvas" width="220" height="150"></canvas>
+      </div>
+
+      <div class="feed-card" id="feed-card-radar" data-mode="radar">
+        <div class="feed-header">
+          <span class="feed-title">Radar Feed</span>
+          <span class="feed-zoom">2.5 km</span>
+        </div>
+        <canvas id="feed-canvas-radar" class="feed-canvas" width="220" height="150"></canvas>
+      </div>
+    </aside>
+
+    <!-- 4. Assessment Panel (Right Column: Steps 1-5, Internal Scroll) -->
+    <aside class="assessment-panel">
+      <div class="panel-header">
+        <h3 class="panel-title">Your Assessment</h3>
+        <span class="badge-adaptive" id="assessment-status-badge">Standby</span>
+      </div>
+
+      <!-- Flagged Objects Selector -->
+      <div class="flagged-objects-container">
+        <span class="flagged-label">Flagged Contacts (Click object to detect)</span>
+        <div class="flagged-chips-list" id="flagged-chips-list">
+          <span style="font-size: 11px; color: var(--muted);">No objects detected yet</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Detect Status -->
+      <div class="step-section unlocked" id="step-1-detect">
+        <div class="step-header">
+          <span class="step-num">1</span>
+          <span>Detection Status</span>
+        </div>
+        <div class="detect-status-indicator dormant" id="detect-status-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <span id="detect-status-text">Click contact on screen to detect</span>
+        </div>
+      </div>
+
+      <!-- Step 2: Classify -->
+      <div class="step-section" id="step-2-classify">
+        <div class="step-header">
+          <span class="step-num">2</span>
+          <span>Classification</span>
+        </div>
+        <div class="option-grid" id="classify-grid">
+          <button class="opt-btn" data-class="multirotor">Multirotor Drone</button>
+          <button class="opt-btn" data-class="fixed_wing_uav">Fixed-Wing UAV</button>
+          <button class="opt-btn" data-class="bird">Bird</button>
+          <button class="opt-btn" data-class="balloon">Balloon</button>
+          <button class="opt-btn" data-class="light_aircraft">Aircraft</button>
+          <button class="opt-btn" data-class="unknown">Unknown</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Threat Rating -->
+      <div class="step-section" id="step-3-threat">
+        <div class="step-header">
+          <span class="step-num">3</span>
+          <span>Threat Level</span>
+        </div>
+        <div class="threat-grid" id="threat-grid">
+          <button class="threat-btn" data-val="0">Benign</button>
+          <button class="threat-btn" data-val="1">Low</button>
+          <button class="threat-btn" data-val="2">Elevated</button>
+          <button class="threat-btn" data-val="3">High</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Recommended Response Choice -->
+      <div class="step-section" id="step-4-response">
+        <div class="step-header">
+          <span class="step-num">4</span>
+          <span>Recommended Response</span>
+        </div>
+        <select class="response-select" id="response-select" disabled>
+          <option value="">Select response...</option>
+        </select>
+      </div>
+
+      <!-- Step 5: Confidence Slider -->
+      <div class="step-section" id="step-5-confidence">
+        <div class="step-header">
+          <span class="step-num">5</span>
+          <span>Confidence</span>
+        </div>
+        <div class="slider-container">
+          <div class="slider-val-row">
+            <span>Certainty</span>
+            <span id="confidence-val-text" style="font-weight: 700; color: var(--blue);">75%</span>
+          </div>
+          <input type="range" class="confidence-slider" id="confidence-slider" min="0" max="100" value="75" disabled>
+        </div>
+      </div>
+
+      <!-- Submit Assessment Button -->
+      <button class="btn-submit-assessment" id="btn-submit-assessment" disabled>
+        Save Contact Assessment
+      </button>
+    </aside>
+
+  </main>
+
+  <!-- Bottom Playback Controls Bar -->
+  <footer class="bottom-bar">
+    <div class="playback-controls">
+      <button class="btn-ctrl" id="btn-play-pause" title="Play / Pause">
+        <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="icon-play" style="display:none;" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <button class="btn-ctrl speed-toggle-btn" id="btn-speed-toggle" title="Playback Speed">1x</button>
+    </div>
+
+    <!-- Simulation Time Clock -->
+    <div class="clock-display">
+      <span class="clock-curr" id="sim-clock-curr">00:00.0</span>
+      <span class="clock-slash">/</span>
+      <span class="clock-total" id="sim-clock-total">01:00.0</span>
+    </div>
+
+    <!-- Non-scrubbable Training Progress Bar -->
+    <div class="progress-track-wrapper">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+  </footer>
+
+  <!-- App Shell Slim Footer Strip -->
+  <footer class="app-footer-strip">
+    <div class="footer-left">
+      <span class="footer-dot-amber"></span>
+      <span>Synthetic data. Training prototype. Not a certified military simulation.</span>
+    </div>
+    <div class="footer-right">
+      <span class="mono-label">TEAM NEXXGENX - PS 26247</span>
+    </div>
+  </footer>
+
+  <!-- Modal: Session Results (Shared Unified AAR Renderer) -->
+  <div class="modal-overlay" id="modal-results">
+    <div class="modal-dialog" style="max-width: 960px; width: 95%; max-height: 90vh;">
+      <div class="modal-header">
+        <h3 class="modal-title">After Action Review & Scenario Evaluation</h3>
+        <button class="btn-close-modal" id="btn-close-results">&times;</button>
+      </div>
+      <div class="modal-body" id="results-modal-body" style="max-height: calc(90vh - 60px);">
+        <!-- Populated dynamically by DroneDrillAAR.renderAAR -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Scripted Scenarios Picker -->
+  <div class="modal-overlay" id="modal-scenarios">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Hand-Authored Scenario Library</h3>
+        <button class="btn-close-modal" id="btn-close-scenarios">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="scenarios-list" id="scenarios-list-container">
+          <!-- Populated from GET /scenarios -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: After Action Review (AAR) -->
+  <div class="modal-overlay" id="modal-aar">
+    <div class="modal-dialog" style="max-width: 960px; width: 95%; max-height: 90vh;">
+      <div class="modal-header">
+        <h3 class="modal-title">After Action Review (AAR)</h3>
+        <button class="btn-close-modal" id="btn-close-aar">&times;</button>
+      </div>
+      <div class="modal-body" id="aar-modal-body" style="max-height: calc(90vh - 60px);">
+        <!-- Populated from GET /aar/{session_id} -->
+      </div>
+    </div>
+  </div>
+
+  </div> <!-- /simulator-root -->
+
+  <!-- Load JavaScript Modules -->
+  <script src="config.js?v=skyready"></script>
+  <script src="radar_widget.js?v=skyready"></script>
+  <script src="renderer.js?v=skyready"></script>
+  <script src="feeds_renderer.js?v=skyready"></script>
+  <script src="canvas_renderer.js?v=skyready"></script>
+  <script src="aar_renderer.js?v=skyready"></script>
+  <script src="sim.js?v=skyready"></script>
+  <script src="app.js?v=skyready"></script>
+</body>
+</html>

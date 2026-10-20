@@ -1,0 +1,123 @@
+{
+  "scenario_id": "scripted_05_swarm_overload",
+  "title": "Perception Overload Swarm",
+  "description": "Perception-overload drill presenting 10 simultaneous contacts with varied spatial spacing, mixed between multirotors, fixed-wing UAVs, and distracter birds.",
+  "source": "scripted",
+  "cell": [
+    "day",
+    "clear",
+    "urban",
+    "EO",
+    "none",
+    "birds"
+  ],
+  "factors": {
+    "time_of_day": "day",
+    "weather": "clear",
+    "terrain": "urban",
+    "sensor_mode": "EO",
+    "degradation": "none",
+    "distractors": "birds",
+    "object_count": "9+",
+    "motion_pattern": "converging",
+    "speed_band": "med",
+    "altitude_band": "med",
+    "bearing_sector": "S"
+  },
+  "objects": [
+    {
+      "id": "swarm_lead_01",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [50.0, 1400.0, 150.0],
+      "velocity": [-1.0, -12.0, 0.0],
+      "appears_at_time": 0.0
+    },
+    {
+      "id": "swarm_flank_l_02",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [-120.0, 1450.0, 160.0],
+      "velocity": [1.5, -11.5, 0.0],
+      "appears_at_time": 0.2
+    },
+    {
+      "id": "swarm_flank_r_03",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [180.0, 1420.0, 155.0],
+      "velocity": [-2.0, -12.5, 0.0],
+      "appears_at_time": 0.3
+    },
+    {
+      "id": "swarm_uav_high_04",
+      "true_class": "fixed_wing_uav",
+      "true_threat_level": 3,
+      "behaviour_label": "suspicious",
+      "start_position": [20.0, 1800.0, 220.0],
+      "velocity": [-0.8, -18.0, 0.0],
+      "appears_at_time": 1.0
+    },
+    {
+      "id": "swarm_distract_bird_05",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [80.0, 1200.0, 130.0],
+      "velocity": [2.0, -8.0, 0.05],
+      "appears_at_time": 1.2
+    },
+    {
+      "id": "swarm_distract_bird_06",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [-60.0, 1250.0, 140.0],
+      "velocity": [-1.8, -7.8, -0.05],
+      "appears_at_time": 1.5
+    },
+    {
+      "id": "swarm_sub_07",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [-180.0, 1600.0, 170.0],
+      "velocity": [1.2, -13.0, 0.0],
+      "appears_at_time": 2.0
+    },
+    {
+      "id": "swarm_sub_08",
+      "true_class": "multirotor",
+      "true_threat_level": 2,
+      "behaviour_label": "suspicious",
+      "start_position": [140.0, 1580.0, 180.0],
+      "velocity": [-1.5, -12.2, 0.0],
+      "appears_at_time": 2.2
+    },
+    {
+      "id": "swarm_uav_trail_09",
+      "true_class": "fixed_wing_uav",
+      "true_threat_level": 3,
+      "behaviour_label": "suspicious",
+      "start_position": [-80.0, 1900.0, 240.0],
+      "velocity": [1.0, -17.0, 0.0],
+      "appears_at_time": 3.0
+    },
+    {
+      "id": "swarm_distract_bird_10",
+      "true_class": "bird",
+      "true_threat_level": 0,
+      "behaviour_label": "benign",
+      "start_position": [110.0, 1300.0, 145.0],
+      "velocity": [-1.5, -8.5, 0.0],
+      "appears_at_time": 3.5
+    }
+  ],
+  "duration_s": 90.0,
+  "noise_windows": 5,
+  "difficulty_index": 0.72,
+  "fingerprint": "scripted_fp_swarm_overload_05"
+}
